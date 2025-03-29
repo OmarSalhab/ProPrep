@@ -31,12 +31,12 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route index path="/" element={<Home/>} />
         <Route path="/login" element={isAuthenticated ? <Navigate to="/home" replace /> : <Login />} />
         <Route path="/signup" element={isAuthenticated ? <Navigate to="/home" replace /> : <SignUp />} />
         <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />} />
-        <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/login" replace />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/quiz" element={isAuthenticated ? <Quiz /> : <Navigate to="/login" replace />} />
-        <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/login"} replace />} />
       </Routes>
     </Router>
   )

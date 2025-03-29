@@ -21,9 +21,9 @@ export const generateQuiz = async (text: string) => {
     3. Distribute correct answers evenly
     4. Keep questions clear and concise
     5. Make sure the "CorrectAnswer" is a number ranges from 1 to 4
-    6 If the language of the text is different than english your response should be the same as the Text language (e.g Arabic, answer Arabic)`;
+    `;
 
-		const response = await fetch("http://localhost:3001/v1/chat/completions", {
+		const response = await fetch(`${import.meta.env.VITE_OLLAMA_KEY}/v1/chat/completions`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({

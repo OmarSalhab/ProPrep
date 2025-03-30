@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
 import {
 	FileText,
 	AlertCircle,
@@ -19,7 +18,7 @@ import { useTheme } from "../lib/context/ThemeContext";
 import { useUserMenu } from "../lib/context/UserMenuContext";
 import { useWindowSize } from "../lib/context/useWindowSize";
 
-function MultipleQ({ showSidePanel }) {
+function MultipleQ({ showSidePanel }: { showSidePanel: boolean }) {
 	const navigate = useNavigate();
 	const { theme, language } = useTheme();
 	const [dragActive, setDragActive] = useState(false);

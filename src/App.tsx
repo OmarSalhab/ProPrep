@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -16,7 +16,7 @@ function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
 	useEffect(() => {
-		supabase.auth.onAuthStateChange((event, session) => {
+		supabase.auth.onAuthStateChange((_ , session) => {
 			setIsAuthenticated(!!session);
 		});
 

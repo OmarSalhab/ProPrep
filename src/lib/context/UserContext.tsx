@@ -6,6 +6,8 @@ type UserContextType = {
   userName: string;
   setUserName: (name: string) => void;
   fetchUserProfile: () => Promise<void>;
+  islogged: boolean;
+  setIsLogged: (logged: boolean) => void;
 };
 
 // Create context with initial value
@@ -23,7 +25,7 @@ export const useUser = () => {
 // Provider component
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [userName, setUserName] = useState('');
-
+  const [islogged,setIsLogged] = useState(false)
   const fetchUserProfile = async () => {
     const { data: { session } } = await supabase.auth.getSession();
     if (session) {
@@ -40,13 +42,16 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
+    
     fetchUserProfile();
-  }, []);
+  }, [islogged]);
 
   const value = {
     userName,
     setUserName,
-    fetchUserProfile
+    fetchUserProfile,
+    islogged,
+    setIsLogged
   };
 
   return (

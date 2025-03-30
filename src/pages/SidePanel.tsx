@@ -34,14 +34,18 @@ function SidePanel({ setPageType, setShowSidePanel, showSidePanel }) {
 		},
 		{
 			icon: <BrainCircuit className="w-5 h-5" />,
-			titleEn: "AI Generated",
+			titleEn: "AI Generated (coming soon)",
 			titleAr: "توليد الذكاء الاصطناعي",
 			descEn: "Smart question generation",
 			descAr: "توليد أسئلة ذكية",
 		},
 	];
 	const handelSidePanel = (target: number) => {
-		setPageType(target);
+		if(target !== 2){
+			setPageType(target);
+
+		}
+		
 	};
 
 	return (

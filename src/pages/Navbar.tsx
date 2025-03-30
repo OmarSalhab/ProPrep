@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { JSXElementConstructor, useState } from "react";
 import { useUser } from "../lib/context/UserContext";
 import {
 	BookOpen,
@@ -18,13 +18,19 @@ import { useTheme } from "../lib/context/ThemeContext";
 import { supabase } from "../lib/supabase";
 import { useUserMenu } from "../lib/context/UserMenuContext";
 
-function Navbar({children }) {
+function Navbar({
+	children,
+}: {
+	children: React.DetailedHTMLProps<
+		React.ButtonHTMLAttributes<HTMLButtonElement>,
+		HTMLButtonElement
+	>;
+}) {
 	const { showUserMenu, setShowUserMenu } = useUserMenu();
 	const [showUserSliderMenu, setshowUserSliderMenu] = useState(false);
 	const { theme, language, toggleTheme, setLanguage } = useTheme();
-	const { userName,setUserName} = useUser();
+	const { userName, setUserName } = useUser();
 	const navigate = useNavigate();
-	
 
 	const handleSignOut = async () => {
 		await supabase.auth.signOut();
@@ -66,7 +72,7 @@ function Navbar({children }) {
 								{theme === "dark" ? (
 									<Sun className="h-5 w-5  text-white" />
 								) : (
-									<Moon className="h-5 w-5  text-gray-900"  />
+									<Moon className="h-5 w-5  text-gray-900" />
 								)}
 							</button>
 
@@ -76,7 +82,11 @@ function Navbar({children }) {
 									theme === "dark" ? "hover:bg-gray-700" : "hover:bg-gray-100"
 								}`}
 							>
-								<Languages className={`h-5 w-5 ${theme === 'dark'?' text-white': "text-gray-900"}`} />
+								<Languages
+									className={`h-5 w-5 ${
+										theme === "dark" ? " text-white" : "text-gray-900"
+									}`}
+								/>
 							</button>
 
 							{children}
@@ -109,7 +119,8 @@ function Navbar({children }) {
 										} px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg
                                         hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500`}
 									>
-										{language === "en" ? "Login":"تسجيل الدخول"} <LogIn className="h-4 w-4  ml-2" />
+										{language === "en" ? "Login" : "تسجيل الدخول"}{" "}
+										<LogIn className="h-4 w-4  ml-2" />
 									</button>
 								)}
 								{showUserMenu && (
@@ -154,9 +165,17 @@ function Navbar({children }) {
 								onClick={() => setshowUserSliderMenu(!showUserSliderMenu)}
 							>
 								{showUserSliderMenu ? (
-									<X className="h-6 w-6" />
+									<X
+										className={`h-7 w-7 ${
+											theme === "dark" ? "text-white" : "text-gray-900"
+										}`}
+									/>
 								) : (
-									<Menu className="h-6 w-6 " />
+									<Menu
+										className={`h-7 w-7 ${
+											theme === "dark" ? "text-white" : "text-gray-900"
+										}`}
+									/>
 								)}
 							</button>
 

@@ -1,6 +1,7 @@
 import MultipleQ from "./MultipleQ";
+import EssayQ from "./EssayQ";
 import Navbar from "./Navbar";
-import SidePanel from "./sidePanel";
+import SidePanel from "./SidePanel";
 import { useState, useMemo } from "react";
 function Dashboard() {
 	const [pageType, setPageType] = useState(0);
@@ -11,7 +12,7 @@ function Dashboard() {
 				return <MultipleQ showSidePanel={showSidePanel} />;
 
 			case 1:
-				return <div>this is the page number 2</div>;
+				return <EssayQ showSidePanel={showSidePanel}/>;
 
 			case 2:
 				return <div>this is the page number 3</div>;

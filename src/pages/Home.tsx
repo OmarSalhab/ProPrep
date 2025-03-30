@@ -25,7 +25,6 @@ import Navbar from "./Navbar";
 function Home() {
 	const navigate = useNavigate();
 	const [showTutorial, setShowTutorial] = useState(false);
-	const [tutorialStep, setTutorialStep] = useState(1);
 	const { theme, language } = useTheme();
 	const { setShowUserMenu } = useUserMenu();
 	const [expandedItems, setExpandedItems] = useState<number[]>([]);
@@ -665,7 +664,7 @@ function Home() {
 									theme === "dark" ? "text-white" : "text-gray-900"
 								}`}
 							>
-								Quiz Generator AI
+								ProPrep
 							</h3>
 							<p
 								className={`text-sm ${
@@ -775,19 +774,7 @@ function Home() {
 				</div>
 			</footer>
 
-			{/* Tutorial Modal */}
-			{showTutorial && (
-				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-					<div
-						className={`${
-							theme === "dark" ? "bg-gray-800" : "bg-white"
-						} rounded-xl p-8 max-w-md animate-fade-in`}
-					>
-						this is the tutorial
-						{/* Tutorial content */}
-					</div>
-				</div>
-			)}
+			
 		</div>
 	);
 }

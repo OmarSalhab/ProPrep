@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useUser } from "../lib/context/UserContext";
 import {
 	BookOpen,
 	LogOut,
@@ -15,33 +16,15 @@ import {
 } from "lucide-react";
 import { useTheme } from "../lib/context/ThemeContext";
 import { supabase } from "../lib/supabase";
+import { useUserMenu } from "../lib/context/UserMenuContext";
 
-function Navbar({ showUserMenu, setShowUserMenu, children }) {
-	const [userName, setUserName] = useState("");
+function Navbar({children }) {
+	const { showUserMenu, setShowUserMenu } = useUserMenu();
 	const [showUserSliderMenu, setshowUserSliderMenu] = useState(false);
 	const { theme, language, toggleTheme, setLanguage } = useTheme();
+	const { userName,setUserName} = useUser();
 	const navigate = useNavigate();
-
-	useEffect(() => {
-		fetchUserProfile();
-	}, []);
-
-	const fetchUserProfile = async () => {
-		const {
-			data: { session },
-		} = await supabase.auth.getSession();
-		if (session) {
-			const { data: profile } = await supabase
-				.from("profiles")
-				.select("name")
-				.eq("id", session.user.id)
-				.single();
-
-			if (profile) {
-				setUserName(profile.name);
-			}
-		}
-	};
+	
 
 	const handleSignOut = async () => {
 		await supabase.auth.signOut();
@@ -81,9 +64,9 @@ function Navbar({ showUserMenu, setShowUserMenu, children }) {
 								}`}
 							>
 								{theme === "dark" ? (
-									<Sun className="h-5 w-5" />
+									<Sun className="h-5 w-5  text-white" />
 								) : (
-									<Moon className="h-5 w-5" />
+									<Moon className="h-5 w-5  text-gray-900"  />
 								)}
 							</button>
 
@@ -93,7 +76,7 @@ function Navbar({ showUserMenu, setShowUserMenu, children }) {
 									theme === "dark" ? "hover:bg-gray-700" : "hover:bg-gray-100"
 								}`}
 							>
-								<Languages className="h-5 w-5" />
+								<Languages className={`h-5 w-5 ${theme === 'dark'?' text-white': "text-gray-900"}`} />
 							</button>
 
 							{children}
@@ -126,7 +109,7 @@ function Navbar({ showUserMenu, setShowUserMenu, children }) {
 										} px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg
                                         hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500`}
 									>
-										Login <LogIn className="h-4 w-4  ml-2" />
+										{language === "en" ? "Login":"تسجيل الدخول"} <LogIn className="h-4 w-4  ml-2" />
 									</button>
 								)}
 								{showUserMenu && (

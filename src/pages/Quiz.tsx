@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ChevronRight, CheckCircle, XCircle } from 'lucide-react'
 import { useTheme } from '../lib/context/ThemeContext'

@@ -4,23 +4,23 @@ function cleanJsonText(text: string) {
 }
 
 export const generateQuiz = async (text: string) => {
+	const Qcount = 10
 	try {
-		const prompt = `Based on the following text, create 15 multiple-choice questions with 4 options each. Format the response as a JSON object(start the response with curly line only "{" and end it with the curly line "}" only) with a 'questions' array where each question object has the following structure:
+		const prompt = `Based on the following text, create ${Qcount} multiple-choice questions with 4 options each. Format the response as a JSON object(start the response with curly line only "{" and end it with the curly line "}" only dont put any  or mention json) with a 'questions' array where each question object has the following structure:
     {
       "question": "The question text",
       "options": ["Option A", "Option B", "Option C", "Option D"],
       "correctAnswer": 0
     }
 
-    Text: ${text}
+Text: ${text}
 
-    Remember to:
-    0. Only respond with the structure don't add any follow up to what you have done
+Remember to:
     1. Make questions that test understanding, not just memorization
     2. Ensure all options are plausible
     3. Distribute correct answers evenly
     4. Keep questions clear and concise
-    5. Make sure the "CorrectAnswer" is a number ranges from 1 to 4
+	5. correctAnswer: should be between 0-3
     `;
 
 		const response = await fetch(`${import.meta.env.VITE_OLLAMA_KEY}/v1/chat/completions`, {

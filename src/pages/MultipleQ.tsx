@@ -12,8 +12,8 @@ import {
 	CheckCircle,
 } from "lucide-react";
 
-import { generateQuiz } from "../lib/openai";
-import { readPDF } from "../lib/pdfReader";
+import { generateQuiz } from "../lib/ollama";
+import { PDFWorkerManager } from "../lib/pdfReader";
 import { useTheme } from "../lib/context/ThemeContext";
 import { useUserMenu } from "../lib/context/UserMenuContext";
 import { useWindowSize } from "../lib/context/useWindowSize";
@@ -60,35 +60,32 @@ function MultipleQ({ showSidePanel }: { showSidePanel: boolean }) {
 	};
 
 	const handleFileSelection = async (file: File) => {
-		setError("");
-		if (file.type !== "application/pdf") {
-			setError(
-				language === "en" ? "Please upload a PDF file" : "يرجى تحميل ملف PDF"
-			);
-			return;
-		}
-		if (file.size > 10 * 1024 * 1024) {
-			setError(
-				language === "en"
-					? "File size should be less than 10MB"
-					: "يجب أن يكون حجم الملف أقل من 10 ميجابايت"
-			);
-			return;
-		}
+		console.log('Starting file processing:', file.name);
+		
 		setLoading(true);
+		const workerManager = new PDFWorkerManager();
+
 		try {
-			const extractedText = await readPDF(file);
+			console.log('Initializing worker...');
+			await workerManager.initialize();
+			
+			console.log('Extracting text...');
+			const extractedText = await workerManager.loadPDF(file);
+			
+			console.log('Text extracted, length:', extractedText.length);
 			setText(extractedText);
 			setFile(file);
 		} catch (err) {
+			console.error('File processing error:', err);
 			setError(
 				language === "en"
 					? "Failed to read PDF file. Please try again."
 					: "فشل في قراءة ملف PDF. حاول مرة اخرى."
-			);
-			console.error(err);
+				);
 		} finally {
+			console.log('Processing complete');
 			setLoading(false);
+			workerManager.destroy();
 		}
 	};
 
@@ -206,9 +203,8 @@ function MultipleQ({ showSidePanel }: { showSidePanel: boolean }) {
 								className={`text-lg font-semibold mb-2 ${
 									theme === "dark" ? "text-white" : "text-gray-900"
 								}`}
-							>
-								{feature.title}
-							</h3>
+							></h3>
+							{feature.title}
 							<p
 								className={theme === "dark" ? "text-gray-300" : "text-gray-600"}
 							>

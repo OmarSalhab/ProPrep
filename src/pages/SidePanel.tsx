@@ -41,11 +41,9 @@ function SidePanel({ setPageType, setShowSidePanel, showSidePanel }) {
 		},
 	];
 	const handelSidePanel = (target: number) => {
-		if(target !== 2){
+		if (target !== 2) {
 			setPageType(target);
-
 		}
-		
 	};
 
 	return (
@@ -57,8 +55,8 @@ function SidePanel({ setPageType, setShowSidePanel, showSidePanel }) {
 				}}
 				className={`fixed lg:block hidden left-0 h-full ${
 					theme === "dark" ? "bg-gray-800" : "bg-white"
-				} shadow-xl transition-all duration-300 ${
-					isOpen ? "max-w-80" : "w-16"
+				} shadow-xl  ${
+					isOpen ? (`${language === 'en' ? "max-w-80" : " max-w-80 pr-16" }`) : "w-16"
 				} z-40`}
 			>
 				{/* Toggle Button */}

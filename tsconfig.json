@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    
+  "module": "es2020",
+	"jsx": "react",
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,

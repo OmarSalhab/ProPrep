@@ -13,8 +13,8 @@ import {
 	List,
 } from "lucide-react";
 
-import { generateEssayQuiz } from "../lib/openai";
-import { readPDF } from "../lib/pdfReader";
+import { generateEssayQuiz } from "../lib/ollama";
+// import { readPDF } from "../lib/pdfReader";
 import { useTheme } from "../lib/context/ThemeContext";
 import { useUserMenu } from "../lib/context/UserMenuContext";
 import { useWindowSize } from "../lib/context/useWindowSize";
@@ -80,9 +80,9 @@ function EssayQ({ showSidePanel }) {
 		}
 		setLoading(true);
 		try {
-			const extractedText = await readPDF(file);
-			setText(extractedText);
-			setFile(file);
+			// const extractedText = await readPDF(file);
+			// setText(extractedText);
+			// setFile(file);
 		} catch (err) {
 			setError(
 				language === "en"

@@ -1,21 +1,21 @@
 function cleanJsonText(text: string) {
 	// Remove the starting ```json and ending ```
 	return text.replace(/^```json\s*/, "").replace(/\s*```$/, "");
+	
 }
 
 export const generateQuiz = async (text: string) => {
-	const Qcount = 10
-	try {
-		const prompt = `Based on the following text, create ${Qcount} multiple-choice questions with 4 options each. Format the response as a JSON object(start the response with curly line only "{" and end it with the curly line "}" only dont put any  or mention json) with a 'questions' array where each question object has the following structure:
+	
+	const prompt = `Based on the following text, create 10 multiple-choice questions with 4 options each. Format the response as a JSON object(start the response with curly line only "{" and end it with the curly line "}" only dont put any  or mention json) with a 'questions' array where each question object has the following structure:
     {
       "question": "The question text",
       "options": ["Option A", "Option B", "Option C", "Option D"],
       "correctAnswer": 0
     }
 
-Text: ${text}
+	Text: ${text}
 
-Remember to:
+	Remember to:
     1. Make questions that test understanding, not just memorization
     2. Ensure all options are plausible
     3. Distribute correct answers evenly
@@ -23,7 +23,8 @@ Remember to:
 	5. correctAnswer: should be between 0-3
     `;
 
-		const response = await fetch(`${import.meta.env.VITE_OLLAMA_KEY}/v1/chat/completions`, {
+	try {
+		const response = await fetch(`http://localhost:3001/v1/chat/completions`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
@@ -31,7 +32,8 @@ Remember to:
 				messages: [{ role: "user", content: prompt }],
 			}),
 		});
-
+		console.log(response);
+		
 		const badData = await response.json();
 
 		const data = cleanJsonText(badData.choices[0].message.content);

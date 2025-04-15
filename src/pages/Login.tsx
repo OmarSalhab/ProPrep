@@ -121,7 +121,8 @@ function Login() {
 									type="checkbox"
 									checked={rememberMe}
 									onChange={(e) => setRememberMe(e.target.checked)}
-									className="h-4 w-4 bg-white text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+									style={{accentColor: "white !important",backgroundColor: "white !important"}}
+									className="h-4 w-4  text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
 								/>
 								<label
 									htmlFor="remember-me"

@@ -24,7 +24,7 @@ export const generateQuiz = async (text: string) => {
     `;
 
 	try {
-		const response = await fetch(`https://ollama-server-2peb.onrender.com`, {
+		const response = await fetch(`https://ollama-server-2peb.onrender.com/v1/chat/completions`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({

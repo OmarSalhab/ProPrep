@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
 	Sparkles,
@@ -237,7 +237,7 @@ function Home() {
 										{language === "en" ? "Get Started" : "ابدأ الآن"}
 									</button>
 									<button
-										onClick={() => setShowTutorial(true)}
+										onClick={() => document.getElementById("tutorial")?.scrollIntoView({behavior: "smooth"})}
 										className={`px-6 py-3 rounded-lg border-2 
               ${
 								theme === "dark"
@@ -380,7 +380,7 @@ function Home() {
 				{/* **********HOW TO GENERATE A QUIZ ***************** */}
 
 				{/* How It Works Section */}
-				<section
+				<section id="tutorial"
 					className={`py-20 ${
 						theme === "dark" ? "bg-gray-800" : "bg-purple-50"
 					}`}
@@ -426,7 +426,7 @@ function Home() {
 							</div>
 
 							{/* Tutorial Call to Action */}
-							<div className="mt-8 text-center">
+							<div  className="mt-8 text-center">
 								<button
 									onClick={() => setShowTutorial(true)}
 									className={`group inline-flex items-center px-6 py-3 rounded-lg 

@@ -38,24 +38,15 @@
   <link rel="icon" type="image/svg+xml" href="/public/images/favicon.webp" />
   <link rel="apple-touch-icon" href="https://firebasestorage.googleapis.com/v0/b/telegram-bot-abbb2.firebasestorage.app/o/images%2Ffavicon.webp?alt=media&token=cd69f274-98f4-4a06-9557-107e6032ab02" />
   
-  <script async type="module">
-    import.meta.env && (function() {
-      const analyticsId = import.meta.env.VITE_GOOGLE_ID;
-      if (analyticsId) {
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsId}`;
-        document.head.appendChild(script);
-  
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', analyticsId);
-      }
-    })();
-  </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-REXM5G9C8K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-
+  gtag('config', 'G-REXM5G9C8K');
+</script>
   <!-- Canonical URL -->
   <link rel="canonical" href="https://fabulous-gumption-b3b7b7.netlify.app/" />
 </head>
